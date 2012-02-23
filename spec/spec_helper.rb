@@ -31,7 +31,7 @@ module SpecHelper
           :autoit => {
                   # Path to some binary, which opens up a window, what can be
                   # minimized, maximized, activated, closed and etc.
-                  :window1 => "ext\\WindowsForms\\bin\\WindowsForms.exe",
+                  :window1 => "C:\\watirmarkdev\\RAutomation\\ext\\WindowsForms\\bin\\WindowsForms.exe",
                   :window2 => "calc",
                   :window2_title => /calc/i,
                   # Window 1 title, has to be a Regexp.
@@ -56,7 +56,7 @@ module SpecHelper
           :win_32 => {
                   # Path to some binary, which opens up a window, what can be
                   # minimized, maximized, activated, closed and etc.
-                  :window1 => "ext\\WindowsForms\\bin\\WindowsForms.exe",
+                  :window1 => "C:\\watirmarkdev\\RAutomation\\ext\\WindowsForms\\bin\\WindowsForms.exe",
                   :window2 => "calc",
                   :window2_title => /calc/i,
                   # Window 1 title, has to be a Regexp.
