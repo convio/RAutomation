@@ -4,32 +4,15 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{rautomation}
-  s.version = "0.6.5"
+  s.name = "rautomation"
+  s.version = "0.6.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Jarmo Pertman}]
-  s.date = %q{2011-07-16}
-  s.description = %q{RAutomation is a small and easy to use library for helping out to automate windows and their controls
-for automated testing.
-
-RAutomation provides:
-* Easy to use and user-friendly API (inspired by Watir http://www.watir.com)
-* Cross-platform compatibility
-* Easy extensibility - with small scripting effort it's possible to add support for not yet
-  supported platforms or technologies}
-  s.email = %q{jarmo.p@gmail.com}
-  s.extra_rdoc_files = [
-    "LICENSE",
-    "README.rdoc"
-  ]
+  s.authors = ["Jarmo Pertman"]
+  s.date = "2012-04-16"
+  s.description = "RAutomation is a small and easy to use library for helping out to automate windows and their controls\nfor automated testing.\n\nRAutomation provides:\n* Easy to use and user-friendly API (inspired by Watir http://www.watir.com)\n* Cross-platform compatibility\n* Easy extensibility - with small scripting effort it's possible to add support for not yet\n  supported platforms or technologies"
+  s.email = "jarmo.p@gmail.com"
   s.files = [
-    ".document",
-    ".rspec",
-    ".yardopts",
-    "History.rdoc",
-    "LICENSE",
-    "README.rdoc",
     "Rakefile",
     "VERSION",
     "ext/AutoItX/AutoItX.chm",
@@ -104,6 +87,24 @@ RAutomation provides:
     "lib/rautomation/adapter/autoit/text_field.rb",
     "lib/rautomation/adapter/autoit/window.rb",
     "lib/rautomation/adapter/helper.rb",
+    "lib/rautomation/adapter/ms_uia.rb",
+    "lib/rautomation/adapter/ms_uia/button.rb",
+    "lib/rautomation/adapter/ms_uia/button_helper.rb",
+    "lib/rautomation/adapter/ms_uia/checkbox.rb",
+    "lib/rautomation/adapter/ms_uia/constants.rb",
+    "lib/rautomation/adapter/ms_uia/control.rb",
+    "lib/rautomation/adapter/ms_uia/functions.rb",
+    "lib/rautomation/adapter/ms_uia/keystroke_converter.rb",
+    "lib/rautomation/adapter/ms_uia/label.rb",
+    "lib/rautomation/adapter/ms_uia/list_box.rb",
+    "lib/rautomation/adapter/ms_uia/list_item.rb",
+    "lib/rautomation/adapter/ms_uia/locators.rb",
+    "lib/rautomation/adapter/ms_uia/radio.rb",
+    "lib/rautomation/adapter/ms_uia/select_list.rb",
+    "lib/rautomation/adapter/ms_uia/table.rb",
+    "lib/rautomation/adapter/ms_uia/text_field.rb",
+    "lib/rautomation/adapter/ms_uia/uia_dll.rb",
+    "lib/rautomation/adapter/ms_uia/window.rb",
     "lib/rautomation/adapter/win_32.rb",
     "lib/rautomation/adapter/win_32/button.rb",
     "lib/rautomation/adapter/win_32/button_helper.rb",
@@ -126,11 +127,25 @@ RAutomation provides:
     "lib/rautomation/text_field.rb",
     "lib/rautomation/wait_helper.rb",
     "lib/rautomation/window.rb",
+    "spec/adapter/autoit/window_spec.rb",
+    "spec/adapter/ms_uia/button_spec.rb",
+    "spec/adapter/ms_uia/checkbox_spec.rb",
+    "spec/adapter/ms_uia/control_spec.rb",
+    "spec/adapter/ms_uia/keystroke_converter_spec.rb",
+    "spec/adapter/ms_uia/label_spec.rb",
+    "spec/adapter/ms_uia/list_item_spec.rb",
+    "spec/adapter/ms_uia/listbox_spec.rb",
+    "spec/adapter/ms_uia/radio_spec.rb",
+    "spec/adapter/ms_uia/select_list_spec.rb",
+    "spec/adapter/ms_uia/table_spec.rb",
+    "spec/adapter/ms_uia/text_field_spec.rb",
+    "spec/adapter/ms_uia/window_spec.rb",
     "spec/adapter/win_32/button_spec.rb",
     "spec/adapter/win_32/checkbox_spec.rb",
     "spec/adapter/win_32/keystroke_converter_spec.rb",
     "spec/adapter/win_32/label_spec.rb",
     "spec/adapter/win_32/listbox_spec.rb",
+    "spec/adapter/win_32/move_window_spec.rb",
     "spec/adapter/win_32/radio_spec.rb",
     "spec/adapter/win_32/select_list_spec.rb",
     "spec/adapter/win_32/table_spec.rb",
@@ -144,29 +159,10 @@ RAutomation provides:
     "spec/window_spec.rb",
     "spec/windows_spec.rb"
   ]
-  s.homepage = %q{http://github.com/jarmo/RAutomation}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.4}
-  s.summary = %q{Automate windows and their controls through user-friendly API with Ruby}
-  s.test_files = [
-    "spec/adapter/win_32/button_spec.rb",
-    "spec/adapter/win_32/checkbox_spec.rb",
-    "spec/adapter/win_32/keystroke_converter_spec.rb",
-    "spec/adapter/win_32/label_spec.rb",
-    "spec/adapter/win_32/listbox_spec.rb",
-    "spec/adapter/win_32/radio_spec.rb",
-    "spec/adapter/win_32/select_list_spec.rb",
-    "spec/adapter/win_32/table_spec.rb",
-    "spec/adapter/win_32/text_field_spec.rb",
-    "spec/adapter/win_32/window_spec.rb",
-    "spec/button_spec.rb",
-    "spec/buttons_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/text_field_spec.rb",
-    "spec/text_fields_spec.rb",
-    "spec/window_spec.rb",
-    "spec/windows_spec.rb"
-  ]
+  s.homepage = "http://github.com/jarmo/RAutomation"
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.15"
+  s.summary = "Automate windows and their controls through user-friendly API with Ruby"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

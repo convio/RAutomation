@@ -1,61 +1,25 @@
 require 'rubygems'
-require 'rake'
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "rautomation"
-    gem.summary = %Q{Automate windows and their controls through user-friendly API with Ruby}
-    gem.description = %Q{RAutomation is a small and easy to use library for helping out to automate windows and their controls
-for automated testing.
+require 'rake/clean'
+CLEAN << FileList["pkg", "coverage"]
 
-RAutomation provides:
-* Easy to use and user-friendly API (inspired by Watir http://www.watir.com)
-* Cross-platform compatibility
-* Easy extensibility - with small scripting effort it's possible to add support for not yet
-  supported platforms or technologies}
-    gem.email = "jarmo.p@gmail.com"
-    gem.homepage = "http://github.com/jarmo/RAutomation"
-    gem.authors = ["Jarmo Pertman"]
-    gem.add_development_dependency "rspec", "~>2.3"
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
 
-    ignored_files = []
-    ignored_files << ".gitignore" << ".gemspec" << "features" << "IAccessibleDLL.sdf"
-    gem.files = `git ls-files`.strip.split($/).delete_if {|f| f =~ Regexp.union(*ignored_files)}
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+RSpec::Core::RakeTask.new(:rcov) do |t|
+  t.rcov = true
 end
 
+task :default => :spec
 
-task :default => "spec:all"
-
-namespace :spec do
-  require 'rspec/core/rake_task'
-  RSpec::Core::RakeTask.new(:spec)
-
-  RSpec::Core::RakeTask.new(:rcov) do |spec|
-    spec.rcov = true
-  end
-
-  task :spec => :check_dependencies
-
-  adapters = %w[win_32 autoit ms_uia]
-  adapters.each do |adapter|
-    desc "Run specs against #{adapter} adapter"
-    task adapter do
-      ENV["RAUTOMATION_ADAPTER"] = adapter
-      puts "Running specs for adapter: #{adapter}"
-      task = Rake::Task["spec:spec"]
-      task.reenable
-      task.invoke      
-    end
-  end
-
-  desc "Run specs against all adapters"
-  task :all => adapters.map {|a| "spec:#{a}"}
+desc "deploy the gem to the gem server; must be run on on gem server"
+task :deploy => [:clean, :install] do
+  gemserver=ENV['GEM_SERVER']
+  ssh_options='-o User=root -o IdentityFile=~/.ssh/0-default.private -o StrictHostKeyChecking=no -o CheckHostIP=no -o UserKnownHostsFile=/dev/null'
+  temp_dir=`ssh #{ssh_options} #{gemserver} 'mktemp -d'`.strip
+  system("scp #{ssh_options} pkg/*.gem '#{gemserver}:#{temp_dir}'")
+  system("ssh #{ssh_options} #{gemserver} 'gem install --local --no-ri #{temp_dir}/*.gem --ignore-dependencies'")
+  system("ssh #{ssh_options} #{gemserver} 'rm -rf #{temp_dir}'")
 end
-
-require 'yard'
-YARD::Rake::YardocTask.new
